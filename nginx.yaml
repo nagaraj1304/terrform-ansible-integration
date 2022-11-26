@@ -1,0 +1,18 @@
+- hosts: all 
+  remote_user: ec2-user
+  become: yes
+  tasks:
+    - name: yum
+      yum:
+       name: yum 
+       state: latest 
+    - name: install httpd
+      yum:
+       name: httpd
+       state: latest
+    - name: httpd start
+      shell: service httpd start     
+    - name: copy the file      
+      copy:
+          src: /opt/5.4 terraform ansible 2/index.html
+          dest: /var/www/html/index.html
